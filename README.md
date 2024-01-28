@@ -1,9 +1,14 @@
-# VLC Bluray Patcher
+# VLC Bluray AACS Patcher
 
-A simple application that attempts to patch [VideoLAN's VLC Media Player](https://www.videolan.org/) to allow for Bluray Playback. 
+A simple application that attempts to patch the AACS decoding error [VideoLAN's VLC Media Player](https://www.videolan.org/) as seen below when trying to play a Blu-Ray on PC:
+
+![image](https://github.com/Jyodann/vlc_bluray_patcher/assets/48559311/52620f36-b4d2-4323-b800-2501d4fa5888)
+
 It does this by following the instructions done in the following website:
 
 https://vlc-bluray.whoknowsmy.name/ 
+
+
 
 # Requirements and Compatibility
 
