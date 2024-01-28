@@ -1,12 +1,20 @@
 ﻿using System.Diagnostics;
 using System.IO.Compression;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
 
 // Disable warning about using Windows Only APIs
 #pragma warning disable CA1416 
 const string DOWNLOAD_PATH = "./vlc_patch_downloads";
-
+const string KEYS_DB_LINK = "http://fvonline-db.bplaced.net/fv_download.php?lang=eng";
 Console.WriteLine("=== VLC Bluray Patcher by Jyodann ===");
+
+Console.WriteLine("Detecting Configuration");
+
+Console.WriteLine();
+
+Console.WriteLine($"OS: {Environment.OSVersion}");
+Console.WriteLine($"Is 64-bit: {Environment.Is64BitOperatingSystem}");
 
 Console.WriteLine();
 
@@ -18,7 +26,8 @@ var principal = new WindowsPrincipal(identity);
 
 var isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
 
-if (!isAdmin) {
+if (!isAdmin)
+{
     Console.WriteLine("Please run app as admin. Right Click > Run As Administrator");
     Console.ReadKey();
     return;
@@ -88,7 +97,7 @@ Console.WriteLine("Creating temporary download folder for Keys and AACS Dynamic 
 
 Directory.CreateDirectory(DOWNLOAD_PATH);
 
-var keys = Download("Keys Database", "http://fvonline-db.bplaced.net/fv_download.php?lang=eng", "keys.zip");
+var keys = Download("Keys Database", KEYS_DB_LINK ,"keys.zip");
 
 var dynamic_lib = Download("AACS Dynamic Library", "https://vlc-bluray.whoknowsmy.name/files/win64/libaacs.dll", "libaacs.dll");
 
@@ -119,10 +128,10 @@ async Task<string> Download(string name, string url, string file_name)
 Console.WriteLine("Extracting Keys");
 
 var keydb_path = $"./{DOWNLOAD_PATH}/keydb.cfg";
-var libaacs_path = $"./{DOWNLOAD_PATH}/libaacs.dll"; 
+var libaacs_path = $"./{DOWNLOAD_PATH}/libaacs.dll";
 
 if (!File.Exists(keydb_path))
-{   
+{
     ZipFile.ExtractToDirectory($"./{DOWNLOAD_PATH}/keys.zip", $"./{DOWNLOAD_PATH}");
 }
 

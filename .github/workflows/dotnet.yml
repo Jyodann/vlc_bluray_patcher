@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        dotnet-version: [ '7.0.x', '8.0.x' ]
+        dotnet-version: [ '8.0.x' ]
 
     steps:
       - uses: actions/checkout@v4
@@ -19,3 +19,6 @@ jobs:
       # You can test your matrix by printing the current dotnet version
       - name: Display dotnet version
         run: dotnet --version
+
+      - name: Publish Application
+        run: dotnet publish 
