@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         dotnet-version: [ '8.0.x' ]
@@ -22,3 +22,9 @@ jobs:
 
       - name: Publish Application
         run: dotnet publish 
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-release
+          path: bin\Release\net8.0\win-x64\publish\
